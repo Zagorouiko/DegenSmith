@@ -3,3 +3,8 @@ export type NFTData = {
     tokenID: string,
     uri: string
   }
+
+  export type phoneScreenData = {
+    NFTData: NFTData,
+    onNFTLoaded: () => void
+  }

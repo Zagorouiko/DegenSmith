@@ -1,66 +1,31 @@
-import { ConnectWallet, useAddress } from "@thirdweb-dev/react";
-import { useEffect, useState } from "react";
-
-import { useQuery } from '@apollo/client'
-import NFTRenderer from '../components/NFTRenderer'
-import { NFTData } from "../helpers/types";
-import GET_NFT_DATA from '../constants/subgraphQueries'
-
-import { generateImage } from '../helpers/helpers'
-import MintButton from "../components/MintButton";
-
 import View from "../components/View";
-
+import { Canvas } from '@react-three/fiber';
+import { Loader } from "@react-three/drei";
 import 'dotenv/config'
+import { Suspense } from "react";
 require('dotenv').config()
 
 
 export default function Home() {
-  const userAddress = useAddress()
-  const [imageURI, setImageURI] = useState("")
-  const [NFTData, setNFTData] = useState<NFTData[]>([])
-  const { loading, data } = useQuery(GET_NFT_DATA)
-
-  useEffect(() => {
-  if (!loading) {
-    let NFTDataArray: NFTData[] = []
-    try {   
-      data.nftCreates.map((nft: any) => {
-        const { minterAddress, tokenID, uri } = nft
-        let nftObj: NFTData = {
-          minterAddress: minterAddress,
-          tokenID: tokenID,
-          uri: uri
-        }
-        NFTDataArray.push(nftObj)
-      })
-    } catch (err) {
-      console.log(err)
-    }
-    setNFTData(NFTDataArray)
-  }
-}, [data, loading])
-
-  const handleButtonClick = async () => {
-    const image = await generateImage()
-    if (image) {
-      setImageURI(image)
-    }
-  }
-
   return (
-    <div style={{ height: '100vh' }}>
-     <View />
-    <button onClick={handleButtonClick}>Generate Random Image and Mint</button>
-   <ConnectWallet />
-   
-   { userAddress && imageURI ? (<MintButton imageURI={imageURI} userAddress={userAddress}/>) : (<></>)}
-    
-    {NFTData ? NFTData.map((nft: any, index) => {
-      return <NFTRenderer key={index} {...nft}/>
-    })
-    : <></>
-  }
+    <div style={{ height: '100vh' }}>     
+        <Canvas
+          camera={ {
+          fov: 75,
+          near: 0.1,
+          far: 2000,
+          position: [ .29, 5.85, 16.72 ],
+          rotation: [ -0.33, 0.021, 0.0075 ]
+      } }
+          >
+          <Suspense fallback={null}>
+              <View />
+          </Suspense>
+     </Canvas>
+     <Loader 
+     dataInterpolation={(p) => `Loading ${p.toFixed(2)}%`} // Text
+     initialState={(active) => active} // Initial black out state
+     />
   </div>
   )
 }

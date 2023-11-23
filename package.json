@@ -12,7 +12,9 @@
   "dependencies": {
     "@apollo/client": "^3.8.7",
     "@graphprotocol/client-cli": "^3.0.0",
+    "@react-three/drei": "^9.88.7",
     "@react-three/fiber": "^8.15.10",
+    "@react-three/postprocessing": "^2.15.11",
     "@thirdweb-dev/react": "^4.1.2",
     "@thirdweb-dev/sdk": "^4.0.11",
     "@types/parse-json": "^4.0.2",
@@ -22,6 +24,7 @@
     "dotenv": "^16.3.1",
     "ethers": "^5.7.2",
     "graphql": "^16.8.1",
+    "https": "^1.0.0",
     "ipfs-http-client": "^56.0.3",
     "leva": "^0.9.35",
     "next": "14.0.1",
@@ -31,7 +34,10 @@
     "r3f-perf": "^7.1.2",
     "react": "^18",
     "react-dom": "^18",
-    "tunnel-rat": "^0.1.2"
+    "react-spinners": "^0.13.8",
+    "solc-js": "^1.0.1",
+    "tunnel-rat": "^0.1.2",
+    "worker-threads.js": "^1.6.5"
   },
   "devDependencies": {
     "@types/node": "^20",

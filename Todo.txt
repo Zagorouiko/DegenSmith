@@ -1,0 +1,6 @@
+1. Update page automatically when an NFT is created (fade in?)
+
+nice to have: 
+1. Create a transparent screen so the reflection can be seen on the screen
+
+
